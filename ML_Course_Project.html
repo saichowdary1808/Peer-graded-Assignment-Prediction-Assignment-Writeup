@@ -1,0 +1,104 @@
+<p>The confusion matrices show, that the Random Forest algorithm performens better than decision trees. The accuracy for the Random Forest model was 0.995 (95% CI: (0.993, 0.997)) compared to 0.739 (95% CI: (0.727, 0.752)) for Decision Tree model. The random Forest model is choosen.</p>
+
+</div>
+
+<div id="expected-out-of-sample-error-1" class="section level3">
+
+<h3>Expected out-of-sample error</h3>
+
+<p>The expected out-of-sample error is estimated at 0.005, or 0.5%. The expected out-of-sample error is calculated as 1 - accuracy for predictions made against the cross-validation set. Our Test data set comprises 20 cases. With an accuracy above 99% on our cross-validation data, we can expect that very few, or none, of the test samples will be missclassified.</p>
+
+</div>
+
+</div>
+
+<div id="submission" class="section level2">
+
+<h2>Submission</h2>
+
+<p>In this section the files for the project submission are generated using the random forest algorithm on the testing data.</p>
+
+<pre class="r"><code># Perform prediction
+
+predictSubmission &lt;- predict(modFitRF, testing, type=&quot;class&quot;)
+
+predictSubmission</code></pre>
+
+<pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
+
+##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
+
+## Levels: A B C D E</code></pre>
+
+<pre class="r"><code># Write files for submission
+
+pml_write_files = function(x){
+
+  n = length(x)
+
+  for(i in 1:n){
+
+    filename = paste0(&quot;./data/submission/problem_id_&quot;,i,&quot;.txt&quot;)
+
+    write.table(x[i],file=filename,quote=FALSE,row.names=FALSE,col.names=FALSE)
+
+  }
+
+}
+
+
+
+pml_write_files(predictSubmission)</code></pre>
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+<script>
+
+
+
+// add bootstrap table styles to pandoc tables
+
+$(document).ready(function () {
+
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+
+});
+
+
+
+</script>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+
+<script>
+
+  (function () {
+
+    var script = document.createElement("script");
+
+    script.type = "text/javascript";
+
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+
+    document.getElementsByTagName("head")[0].appendChild(script);
+
+  })();
+
+</script>
+
+
+
+</body>
+
+</html>
+
